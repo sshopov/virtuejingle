@@ -112,3 +112,5 @@ def generate_jingle_with_style(lyrics, selected_style):
     jingle = f"Generated jingle in {selected_style} style: {lyrics}"
     return jingle
 
+if __name__ == '__main__':
+    main()
