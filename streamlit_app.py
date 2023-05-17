@@ -6,7 +6,7 @@ import os
 # Step one - Company information
 def company_information():
     st.header("Company Information")
-    company_name = st.text_input("Company Name")
+    company_name = st.text_input("Company Name", key="company_name")
     mission_statement = st.text_area("Company Mission Statement")
     
     if st.button("Next"):
