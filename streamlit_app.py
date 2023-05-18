@@ -1,16 +1,17 @@
 import streamlit as st
 #from gtts import gTTS
-import os
+import os, random
 
 
 # Step one - Company information
 def company_information():
     st.header("Company Information")
-    company_name = st.text_input("Company Name", key="company_name")
-    mission_statement = st.text_area("Company Mission Statement")
+    company_name = st.text_input("Company Name", key=random.randint(0, 10000))
+    mission_statement = st.text_area("Company Mission Statement", key=random.randint(0, 10000))
     
-    if st.button("Next"):
+    if st.button("Next", key=random.randint(0, 10000)):
         return company_name, mission_statement
+    return "",""
     
 
 # Step two - Lyrics
@@ -23,7 +24,7 @@ def generate_lyrics():
     
     if st.button("Regenerate"):
         # Use AI model or algorithm to generate lyrics based on the company's mission statement
-        generated_lyrics = generate_lyrics_from_mission_statement(mission_statement)
+        generated_lyrics = generate_lyrics_from_mission_statement('mission_statement')
         lyrics = st.text_area("Jingle Lyrics", value=generated_lyrics)
     
     if st.button("Next"):
@@ -64,7 +65,8 @@ def generate_jingle():
     
     if st.button("Download"):
         # Download the generated jingle
-        st.markdown(get_download_link(jingle_file), unsafe_allow_html=True)
+        #st.markdown(get_download_link(jingle_file), unsafe_allow_html=True)
+        st.markdown(jingle_file, unsafe_allow_html=True)
 
 
 # Main application flow
@@ -72,15 +74,15 @@ def main():
     st.title("Catchy Jingle Generator")
     
     current_step = 0
-    company_name = ""
-    mission_statement = ""
+    companyname = ""
+    missionstatement = ""
     lyrics = ""
     selected_style = ""
     
     while current_step < 4:
         if current_step == 0:
-            company_name, mission_statement = company_information()
-            if company_name and mission_statement:
+            companyname, missionstatement = company_information()
+            if companyname and missionstatement:
                 current_step += 1
         elif current_step == 1:
             lyrics = generate_lyrics()
